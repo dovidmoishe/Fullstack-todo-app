@@ -1,0 +1,26 @@
+require('dotenv').config()
+const express = require('express')
+const mongo = require('mongoose')
+const BodyParser = require('body-parser')
+var cors = require('cors')
+const app = express()
+app.use(BodyParser.json())
+const authRoute = require('./routes/auth')
+const todosRoute = require('./routes/todos')
+const verifyjwt = require('./routes/verifyjwt')
+const UserModel = require('./models/User')
+app.use(cors())
+app.use('/user', authRoute)
+app.use('/todos', todosRoute) 
+mongo.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
+var db = mongo.connection
+db.on("error",(error) => console.error(error.message))
+db.once("open",() => console.log('connected to db'))
+ 
+app.get('/', verifyjwt, async (req, res) => {
+    const UserData = await UserModel.findById(req.user)
+    res.json(UserData)
+})
+app.listen(3000,() => { 
+    console.log('connected to server') 
+})

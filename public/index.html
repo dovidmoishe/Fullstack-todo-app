@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do App</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/adb4fef6e8.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <i class="fas fa-moon" onclick="Darkmode()"></i>
+      <div class="header-text">
+        <h1>My Todo List</h1>
+      </div>
+      
+      <div class="name-tag">
+        <p></p> -
+        <button class="sign-out" onclick="signout()">Sign Out</button>
+      </div>
+    </header>
+    <div class="todo" id="todolist">
+      <div class="user-inp">
+        <button class="deleteAll">Delete Todos <i class="fa-solid fa-trash"></i></button>
+        <input type="text" id="todotxt" />
+        <button class="add-btn">Add Todos <i class="fas fa-plus"></i></button>
+      </div>
+      <p style="color: rgb(196, 80, 196); text-align: center" id="todosDone">
+        
+      </p>
+      <div class="todos">
+        <ol id="todo-view"></ol>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

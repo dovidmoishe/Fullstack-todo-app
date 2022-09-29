@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.dark {
+  background-color: #191919;
+}
+body {
+  font-family: "Comfortaa", cursive;
+}
+
+li {
+  cursor: pointer;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sign-out {
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-family: "Comfortaa", cursive;
+  cursor: pointer;
+}
+input {
+  width: 100%;
+  border-radius: 2em;
+  padding: 16px 12px;
+  border: 1px solid;
+  margin-left: 1em;
+  margin-right: 1em;
+  outline: none;
+}
+.todo {
+  display: flex;
+  flex-direction: column;
+  padding: 5em;
+  gap: 2em;
+  margin-top: 1em;
+}
+.user-inp button {
+  padding: 10px;
+  background-color: rgb(196, 80, 196);
+  border: none;
+  width: 10em;
+  border-radius: 15px;
+  cursor: pointer;
+  font-family: "Comfortaa", cursive;
+  /* color: white; */
+}
+.add-btn i, .deleteAll i {
+  width: 10px;
+  transition: width 2s;
+}
+.add-btn i:hover, .deleteAll i:hover {
+  width: 20px;
+}
+.user-inp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+li {
+  padding: 1em;
+  text-align: left;
+  background-color: rgb(134, 131, 131);
+}
+li:nth-child(even) {
+  background-color: grey;
+}
+li:nth-child(odd) {
+  background-color: rgb(247, 248, 248);
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  position: fixed;
+  background: #333;
+  padding: 10px 0;
+  color: #fff;
+  top: 0;
+  height: 5em;
+  padding: 1em;
+}
+.header-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+.signuppromt {
+  display: none;
+  background-color: #333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}

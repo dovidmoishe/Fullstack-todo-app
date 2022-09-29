@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <title>Login/Sign up to Todo List App</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap");
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #191919;
+      }
+      .signup-form,
+      .login-form {
+        color: #191919;
+        background-color: rgb(196, 80, 196);
+        padding: 4em;
+        border-radius: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .login-form {
+        display: none;
+      }
+      .signup-btn {
+        padding: 1em;
+        width: 10em;
+        margin-top: 2em;
+        background-color: #191919;
+        color: rgb(196, 80, 196);
+        border-radius: 2em;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+      input {
+        border: none;
+        padding: 1em;
+        border-radius: 2em;
+        width: 20em;
+      }
+      .login {
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="signup-form" id="signup-form">
+      <div class="signup">
+        <p>Name:</p>
+        <input type="text" id="signup-name-input" />
+        <p>Email:</p>
+        <input type="email" id="signup-email-input" />
+        <p>Password:</p>
+        <input type="password" id="signup-password-input" />
+
+        <p>Already have an account?</p>
+        <button class="login" id="open-login">Login</button>
+
+        <br />
+
+        <button class="signup-btn" id="signup-btn">Submit</button>
+      </div>
+    </div>
+    <div class="login-form" id="login-form">
+      <div class="login">
+        <p>Email:</p>
+        <input type="email" id="login-email-input" />
+        <p>Password:</p>
+        <input type="password" id="login-password-input" />
+
+        <p>Don't have an account?</p>
+        <button class="login" id="open-signup">Sign Up</button>
+
+        <br />
+
+        <button class="signup-btn" id="login-btn">Submit</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      const signup_btn = document.getElementById("signup-btn");
+      const signup_name = document.getElementById("signup-name-input");
+      const signup_email = document.getElementById("signup-email-input");
+      const signup_password = document.getElementById("signup-password-input");
+      const login_btn = document.getElementById("login-btn");
+      const login_email = document.getElementById("login-email-input");
+      const login_password = document.getElementById("login-password-input");
+      signup_btn.addEventListener("click", function () {
+        axios
+          .post("http://localhost:3000/user/register", {
+            name: signup_name.value,
+            email: signup_email.value,
+            password: signup_password.value,
+          })
+          .then((data) => {
+            localStorage.setItem("auth-token", data.data.token);
+            Swal.fire({
+              icon: "success",
+              title: "New user created",
+              text: data.data.token
+            });
+            window.open('./index.html')
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: err.response.data
+            });
+
+          });
+      });
+
+      login_btn.addEventListener("click", function () {
+        axios
+          .post("http://localhost:3000/user/login", {
+            email: login_email.value,
+            password: login_password.value,
+          })
+          .then((data) => {
+            localStorage.setItem("auth-token", data.data.token);
+            window.setTimeout(() => {
+              window.open('./index.html')
+            },3000)
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: err.response.data
+            });
+          });
+      });
+      const openloginbtn = document.getElementById("open-login");
+      const signupform = document.getElementById("signup-form");
+      const loginform = document.getElementById("login-form");
+      openloginbtn.addEventListener("click", () => {
+        signupform.style.display = "none";
+        loginform.style.display = "inline";
+      });
+
+      const opensignupbtn = document.getElementById("open-signup");
+      opensignupbtn.addEventListener("click", () => {
+        signupform.style.display = "inline";
+        loginform.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
